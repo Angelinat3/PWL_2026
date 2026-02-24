@@ -26,37 +26,3 @@ Route::get('/user/{name?}', function ($name='John') {
 return 'My name'.$name;
 });
 
-Route::get('/user/profile', function () {
-    
-})->name('profile');
-
-Route::get('/user/profile', [UserProfileController::class, 'show'])->name('profile');
-$url = route('profile');
-return redirect()->route('profile');
-
-Route::middleware(['first', 'second'])->group(function () {
-    Route::get('/', function () {
-});
-});
-
-Route::domain('{account}.example.com')->group(function () {
-    Route::get('user/{id}', function ($account, $id) {
-    });
-});
-
-Route::middleware('auth')->group(function () {
-	Route::get('/user', [UserController::class, 'index']);
-	Route::get('/post', [PostController::class, 'index']);
-	Route::get('/event', [EventController::class, 'index']);
-	
-});
-
-Route::prefix('admin')->group(function () {
-    Route::get('/user', [UserController::class, 'index']);
-    Route::get('/post', [PostController::class, 'index']);
-    Route::get('/event', [EventController::class, 'index']);
-});
-
-Route::redirect('/here', '/there');
-Route::view('/welcome', 'welcome');
-Route::view('/welcome', 'welcome', ['name' => 'Taylor']);
